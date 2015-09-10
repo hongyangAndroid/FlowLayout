@@ -13,7 +13,9 @@ Android流式布局，支持单选、多选等，适合用于产品标签等。
 
 ##效果图
 
-<img src="flowlayout.gif" width="320px"/>
+<img src="flowLayout.gif" width="320px"/>
+
+<img src="sc.png" width="320px"/>
 
 ## 用法
 
