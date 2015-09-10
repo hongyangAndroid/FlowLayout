@@ -55,6 +55,24 @@ mFlowLayout.setAdapter(new TagAdapter<String>(mVals)
 
 getView中回调，类似ListView等用法。
 
+### 对于选中状态
+
+你还在复杂的写代码设置选中后标签的显示效果么，翔哥说No!
+
+```java
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/tag_select_textcolor"
+          android:drawable="@drawable/checked_bg"
+          android:state_checked="true"></item>
+    <item android:drawable="@drawable/normal_bg"></item>
+</selector>
+
+```
+
+设置个background，上面一个状态为android:state_checked，另一个为正常。写写布局文件我都嫌慢，怎么能写一堆代码控制效果，设置改个效果，岂不是没时间dota了。
+
+
 ###事件
 
 ```java
