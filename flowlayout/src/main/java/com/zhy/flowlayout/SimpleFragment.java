@@ -39,7 +39,6 @@ public class SimpleFragment extends Fragment
 
         mFlowLayout.setAdapter(new TagAdapter<String>(mVals)
         {
-
             @Override
             public View getView(FlowLayout parent, int position, String s)
             {
