@@ -13,7 +13,7 @@ public abstract class TagAdapter<T>
 
     public TagAdapter(List<T> datas)
     {
-        mTagDatas = mTagDatas;
+        mTagDatas = datas;
     }
 
     public TagAdapter(T[] datas)
