@@ -59,6 +59,7 @@ public class EventTestFragment extends Fragment
             public boolean onTagClick(View view, int position, FlowLayout parent)
             {
                 Toast.makeText(getActivity(), mVals[position], Toast.LENGTH_SHORT).show();
+                //view.setVisibility(View.GONE);
                 return true;
             }
         });

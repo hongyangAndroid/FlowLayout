@@ -37,7 +37,7 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
         mSelectedMax = ta.getInt(R.styleable.TagFlowLayout_max_select, -1);
         ta.recycle();
 
-        if(mSupportMulSelected)
+        if (mSupportMulSelected)
         {
             setClickable(true);
         }
@@ -51,6 +51,24 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
     public TagFlowLayout(Context context)
     {
         this(context, null);
+    }
+
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
+    {
+        int cCount = getChildCount();
+
+        for (int i = 0; i < cCount; i++)
+        {
+            TagView tagView = (TagView) getChildAt(i);
+            if (tagView.getVisibility() == View.GONE) continue;
+            if (tagView.getTagView().getVisibility() == View.GONE)
+            {
+                tagView.setVisibility(View.GONE);
+            }
+        }
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
     public interface OnSelectListener
@@ -254,6 +272,7 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
         for (int i = 0; i < cCount; i++)
         {
             TagView v = (TagView) getChildAt(i);
+            if (v.getVisibility() == View.GONE) continue;
             Rect outRect = new Rect();
             v.getHitRect(outRect);
             if (outRect.contains(x, y))

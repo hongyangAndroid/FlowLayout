@@ -10,7 +10,7 @@ import java.util.List;
 
 public class FlowLayout extends ViewGroup
 {
-
+    private static final String TAG = "FlowLayout";
     protected List<List<View>> mAllViews = new ArrayList<List<View>>();
     protected List<Integer> mLineHeight = new ArrayList<Integer>();
 
@@ -49,7 +49,15 @@ public class FlowLayout extends ViewGroup
         for (int i = 0; i < cCount; i++)
         {
             View child = getChildAt(i);
-            if (child.getVisibility() == View.GONE) continue;
+            if (child.getVisibility() == View.GONE)
+            {
+                if (i == cCount - 1)
+                {
+                    width = Math.max(lineWidth, width);
+                    height += lineHeight;
+                }
+                continue;
+            }
             measureChild(child, widthMeasureSpec, heightMeasureSpec);
             MarginLayoutParams lp = (MarginLayoutParams) child
                     .getLayoutParams();
@@ -76,8 +84,6 @@ public class FlowLayout extends ViewGroup
                 height += lineHeight;
             }
         }
-
-
         setMeasuredDimension(
                 //
                 modeWidth == MeasureSpec.EXACTLY ? sizeWidth : width + getPaddingLeft() + getPaddingRight(),
