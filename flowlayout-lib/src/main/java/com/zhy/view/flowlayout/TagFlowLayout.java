@@ -10,7 +10,6 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -101,8 +100,8 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
 
     public void setAdapter(TagAdapter adapter)
     {
-        if (mTagAdapter == adapter)
-            return;
+        //if (mTagAdapter == adapter)
+          //  return;
         mTagAdapter = adapter;
         mTagAdapter.setOnDataChangedListener(this);
         changeAdapter();
@@ -118,17 +117,18 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
         for (int i = 0; i < adapter.getCount(); i++)
         {
             View tagView = adapter.getView(this, i, adapter.getItem(i));
+
             tagViewContainer = new TagView(getContext());
-            ViewGroup.MarginLayoutParams clp = (ViewGroup.MarginLayoutParams) tagView.getLayoutParams();
-            ViewGroup.MarginLayoutParams lp = new ViewGroup.MarginLayoutParams(clp);
-            lp.width = ViewGroup.LayoutParams.WRAP_CONTENT;
-            lp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-            lp.topMargin = clp.topMargin;
-            lp.bottomMargin = clp.bottomMargin;
-            lp.leftMargin = clp.leftMargin;
-            lp.rightMargin = clp.rightMargin;
+//            ViewGroup.MarginLayoutParams clp = (ViewGroup.MarginLayoutParams) tagView.getLayoutParams();
+//            ViewGroup.MarginLayoutParams lp = new ViewGroup.MarginLayoutParams(clp);
+//            lp.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+//            lp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+//            lp.topMargin = clp.topMargin;
+//            lp.bottomMargin = clp.bottomMargin;
+//            lp.leftMargin = clp.leftMargin;
+//            lp.rightMargin = clp.rightMargin;
             tagView.setDuplicateParentStateEnabled(true);
-            tagViewContainer.setLayoutParams(lp);
+            tagViewContainer.setLayoutParams(tagView.getLayoutParams());
             tagViewContainer.addView(tagView);
             addView(tagViewContainer);
         }
@@ -147,26 +147,26 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
     }
 
     @Override
-    public boolean performClick()
+     public boolean performClick()
+{
+    if (mMotionEvent == null) return super.performClick();
+
+    int x = (int) mMotionEvent.getX();
+    int y = (int) mMotionEvent.getY();
+    mMotionEvent = null;
+
+    TagView child = findChild(x, y);
+    int pos = findPosByView(child);
+    if (child != null)
     {
-        if (mMotionEvent == null) return super.performClick();
-
-        int x = (int) mMotionEvent.getX();
-        int y = (int) mMotionEvent.getY();
-        mMotionEvent = null;
-
-        TagView child = findChild(x, y);
-        int pos = findPosByView(child);
-        if (child != null)
+        doSelect(child, pos);
+        if (mOnTagClickListener != null)
         {
-            doSelect(child, pos);
-            if (mOnTagClickListener != null)
-            {
-                return mOnTagClickListener.onTagClick(child.getTagView(), pos, this);
-            }
+            return mOnTagClickListener.onTagClick(child.getTagView(), pos, this);
         }
-        return super.performClick();
     }
+    return super.performClick();
+}
 
 
     public void setMaxSelectCount(int count)

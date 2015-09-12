@@ -13,7 +13,7 @@ public class CategoryActivity extends AppCompatActivity
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
 
-    private String[] mTabTitles = new String[]{"Muli Selected", "Limit 3", "Event Test"};
+    private String[] mTabTitles = new String[]{"Muli Selected", "Limit 3", "Event Test","ScrollView Test"};
 
 
     @Override
@@ -37,6 +37,9 @@ public class CategoryActivity extends AppCompatActivity
                     case 1:
                         return new LimitSelectedFragment();
                     case 2:
+                        return new EventTestFragment();
+                    case 3:
+                        return new ScrollViewTestFragment();
                     default:
                         return new EventTestFragment();
                 }

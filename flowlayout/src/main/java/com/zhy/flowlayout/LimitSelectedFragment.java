@@ -20,7 +20,8 @@ public class LimitSelectedFragment extends Fragment
     private String[] mVals = new String[]
             {"Hello", "Android", "Weclome Hi ", "Button", "TextView", "Hello",
                     "Android", "Weclome", "Button ImageView", "TextView", "Helloworld",
-                    "Android", "Weclome Hello", "Button Text", "TextView"};
+                    "Android", "Weclome Hello", "Button Text", "TextView","Hello", "Android", "Weclome Hi ", "Button", "TextView", "Hello",
+                    "Android", "Weclome", "Button ImageView"};
 
     private TagFlowLayout mFlowLayout;
 
