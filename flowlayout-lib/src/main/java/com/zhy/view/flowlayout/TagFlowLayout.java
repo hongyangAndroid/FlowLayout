@@ -101,7 +101,7 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
     public void setAdapter(TagAdapter adapter)
     {
         //if (mTagAdapter == adapter)
-          //  return;
+        //  return;
         mTagAdapter = adapter;
         mTagAdapter.setOnDataChangedListener(this);
         changeAdapter();
@@ -147,26 +147,26 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
     }
 
     @Override
-     public boolean performClick()
-{
-    if (mMotionEvent == null) return super.performClick();
-
-    int x = (int) mMotionEvent.getX();
-    int y = (int) mMotionEvent.getY();
-    mMotionEvent = null;
-
-    TagView child = findChild(x, y);
-    int pos = findPosByView(child);
-    if (child != null)
+    public boolean performClick()
     {
-        doSelect(child, pos);
-        if (mOnTagClickListener != null)
+        if (mMotionEvent == null) return super.performClick();
+
+        int x = (int) mMotionEvent.getX();
+        int y = (int) mMotionEvent.getY();
+        mMotionEvent = null;
+
+        TagView child = findChild(x, y);
+        int pos = findPosByView(child);
+        if (child != null)
         {
-            return mOnTagClickListener.onTagClick(child.getTagView(), pos, this);
+            doSelect(child, pos);
+            if (mOnTagClickListener != null)
+            {
+                return mOnTagClickListener.onTagClick(child.getTagView(), pos, this);
+            }
         }
+        return super.performClick();
     }
-    return super.performClick();
-}
 
 
     public void setMaxSelectCount(int count)
