@@ -12,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -113,7 +114,7 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
         removeAllViews();
         TagAdapter adapter = mTagAdapter;
         TagView tagViewContainer = null;
-
+        HashSet preCheckedList = mTagAdapter.getPreCheckedList();
         for (int i = 0; i < adapter.getCount(); i++)
         {
             View tagView = adapter.getView(this, i, adapter.getItem(i));
@@ -131,7 +132,14 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
             tagViewContainer.setLayoutParams(tagView.getLayoutParams());
             tagViewContainer.addView(tagView);
             addView(tagViewContainer);
+
+
+            if(preCheckedList.contains(i))
+            {
+                tagViewContainer.setChecked(true);
+            }
         }
+        mSelectedView.addAll(preCheckedList);
 
     }
 
@@ -179,7 +187,7 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
         mSelectedMax = count;
     }
 
-    public Set<Integer> getSelectViewPos()
+    public Set<Integer> getSelectedList()
     {
         return new HashSet<Integer>(mSelectedView);
     }
@@ -190,10 +198,23 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
         {
             if (!child.isChecked())
             {
-                if (mSelectedMax > 0 && mSelectedView.size() >= mSelectedMax)
-                    return;
-                child.setChecked(true);
-                mSelectedView.add(position);
+                //处理max_select=1的情况
+                if(mSelectedMax == 1 && mSelectedView.size() == 1)
+                {
+                    Iterator<Integer> iterator = mSelectedView.iterator();
+                    Integer preIndex = iterator.next();
+                    TagView pre = (TagView) getChildAt(preIndex);
+                    pre.setChecked(false);
+                    child.setChecked(true);
+                    mSelectedView.remove(preIndex);
+                    mSelectedView.add(position);
+                }else
+                {
+                    if (mSelectedMax > 0 && mSelectedView.size() >= mSelectedMax)
+                        return;
+                    child.setChecked(true);
+                    mSelectedView.add(position);
+                }
             } else
             {
                 child.setChecked(false);

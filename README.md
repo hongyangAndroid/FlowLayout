@@ -101,4 +101,14 @@ mFlowLayout.setOnSelectListener(new TagFlowLayout.OnSelectListener()
 ```
 选择多个标签时的回调。
 
+##预先设置Item选中
+
+```java
+//预先设置选中
+mAdapter.setSelectedList(1,3,5,7,8,9);
+//获得所有选中的pos集合
+flowLayout.getSelectedList();
+```
+
+
 

@@ -4,12 +4,14 @@ import android.view.View;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 public abstract class TagAdapter<T>
 {
     private List<T> mTagDatas;
     private OnDataChangedListener mOnDataChangedListener;
+    private HashSet<Integer> mCheckedPosList = new HashSet<Integer>();
 
     public TagAdapter(List<T> datas)
     {
@@ -30,6 +32,19 @@ public abstract class TagAdapter<T>
     {
         mOnDataChangedListener = listener;
     }
+
+    public void setSelectedList(int... pos)
+    {
+        for (int i = 0; i < pos.length; i++)
+            mCheckedPosList.add(pos[i]);
+        notifyDataChanged();
+    }
+
+    HashSet<Integer> getPreCheckedList()
+    {
+        return mCheckedPosList;
+    }
+
 
     public int getCount()
     {
