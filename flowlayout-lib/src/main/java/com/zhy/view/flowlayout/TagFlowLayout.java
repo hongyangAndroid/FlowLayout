@@ -21,7 +21,7 @@ import java.util.Set;
 public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChangedListener
 {
     private TagAdapter mTagAdapter;
-    private boolean mSupportMulSelected = true;
+    private boolean mAutoSelectEffect = true;
     private int mSelectedMax = -1;//-1为不限制数量
     private static final String TAG = "TagFlowLayout";
     private MotionEvent mMotionEvent;
@@ -33,11 +33,11 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
     {
         super(context, attrs, defStyle);
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.TagFlowLayout);
-        mSupportMulSelected = ta.getBoolean(R.styleable.TagFlowLayout_multi_suppout, true);
+        mAutoSelectEffect = ta.getBoolean(R.styleable.TagFlowLayout_auto_select_effect, true);
         mSelectedMax = ta.getInt(R.styleable.TagFlowLayout_max_select, -1);
         ta.recycle();
 
-        if (mSupportMulSelected)
+        if (mAutoSelectEffect)
         {
             setClickable(true);
         }
@@ -194,7 +194,7 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
 
     private void doSelect(TagView child, int position)
     {
-        if (mSupportMulSelected)
+        if (mAutoSelectEffect)
         {
             if (!child.isChecked())
             {

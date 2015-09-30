@@ -21,6 +21,12 @@ Android流式布局，支持单选、多选等，适合用于产品标签等。
 
 ## 用法
 
+```java
+dependencies {
+ compile 'com.zhy:flowlayout:1.0.0'
+}
+```
+
 ### 声明
 布局文件中声明：
 
@@ -37,7 +43,7 @@ Android流式布局，支持单选、多选等，适合用于产品标签等。
 支持属性：
 
 `max_select`：-1为不限制选择数量，>=1的数字为控制选择tag的数量
-`multi_suppout` 是否开启多选的支持，默认为true
+`auto_select_effect` 是否开启默认的选中效果，即为selector中设置的效果，默认为true；如果设置为false，则无选中效果，需要自己在回调中处理。
 
 ###设置数据
 
