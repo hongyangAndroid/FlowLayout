@@ -1,6 +1,7 @@
 package com.zhy.view.flowlayout;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +14,16 @@ public class FlowLayout extends ViewGroup
     private static final String TAG = "FlowLayout";
     protected List<List<View>> mAllViews = new ArrayList<List<View>>();
     protected List<Integer> mLineHeight = new ArrayList<Integer>();
+    private String mGravity;
 
     public FlowLayout(Context context, AttributeSet attrs, int defStyle)
     {
         super(context, attrs, defStyle);
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.TagFlowLayout);
+        mGravity = ta.getString(R.styleable.TagFlowLayout_gravity);
+        if (mGravity == null)
+            mGravity = getResources().getString(R.string.gravity_left);
+        ta.recycle();
     }
 
     public FlowLayout(Context context, AttributeSet attrs)
@@ -147,6 +154,7 @@ public class FlowLayout extends ViewGroup
             lineViews = mAllViews.get(i);
             lineHeight = mLineHeight.get(i);
 
+            left = getStartLeft(lineViews);
             for (int j = 0; j < lineViews.size(); j++)
             {
                 View child = lineViews.get(j);
@@ -168,10 +176,38 @@ public class FlowLayout extends ViewGroup
                 left += child.getMeasuredWidth() + lp.leftMargin
                         + lp.rightMargin;
             }
-            left = getPaddingLeft();
             top += lineHeight;
         }
 
+    }
+
+    private int getStartLeft(List<View> lineViews) {
+        int left = getPaddingLeft();
+
+        int needWidth = 0;
+        for (int j = 0; j < lineViews.size(); j++) {
+            View child = lineViews.get(j);
+            if (child.getVisibility() == View.GONE) {
+                continue;
+            }
+
+            MarginLayoutParams lp = (MarginLayoutParams) child
+                    .getLayoutParams();
+            needWidth += child.getMeasuredWidth() + lp.leftMargin
+                    + lp.rightMargin;
+        }
+
+        needWidth += getPaddingLeft() + getPaddingRight();
+        if (mGravity.equals(getResources().getString(R.string.gravity_center))) {
+            if (getMeasuredWidth() > needWidth) {
+                left += (getMeasuredWidth() - needWidth) / 2;
+            }
+        } else if (mGravity.equals(getResources().getString(R.string.gravity_right))) {
+            if (getMeasuredWidth() > needWidth) {
+                left += getMeasuredWidth() - needWidth;
+            }
+        }
+        return left;
     }
 
     @Override

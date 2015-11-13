@@ -8,8 +8,9 @@
         android:id="@+id/id_flowlayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+	android:padding="20dp"
+	zhy:gravity="@string/gravity_center"
         zhy:max_select="1"
-        android:padding="20dp"
         >
     </com.zhy.view.flowlayout.TagFlowLayout>
 </LinearLayout>
