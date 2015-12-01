@@ -105,6 +105,7 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
         //  return;
         mTagAdapter = adapter;
         mTagAdapter.setOnDataChangedListener(this);
+        mSelectedView.clear();
         changeAdapter();
 
     }
@@ -173,7 +174,7 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
                 return mOnTagClickListener.onTagClick(child.getTagView(), pos, this);
             }
         }
-        return super.performClick();
+        return true;
     }
 
 
