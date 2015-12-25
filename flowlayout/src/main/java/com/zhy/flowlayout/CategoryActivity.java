@@ -15,7 +15,7 @@ public class CategoryActivity extends AppCompatActivity
 
     private String[] mTabTitles = new String[]
             {"Muli Selected", "Limit 3",
-                    "Event Test", "ScrollView Test","Single Choose"};
+                    "Event Test", "ScrollView Test","Single Choose","Gravity"};
 
 
     @Override
@@ -44,6 +44,8 @@ public class CategoryActivity extends AppCompatActivity
                         return new ScrollViewTestFragment();
                     case 4:
                         return new SingleChooseFragment();
+                    case 5:
+                        return GravityFragment.getOurInstance();
                     default:
                         return new EventTestFragment();
                 }
