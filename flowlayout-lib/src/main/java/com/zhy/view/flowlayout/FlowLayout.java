@@ -12,17 +12,21 @@ import java.util.List;
 public class FlowLayout extends ViewGroup
 {
     private static final String TAG = "FlowLayout";
+    private static final int LEFT = -1;
+    private static final int CENTER = 0;
+    private static final int RIGHT = 1;
+
     protected List<List<View>> mAllViews = new ArrayList<List<View>>();
     protected List<Integer> mLineHeight = new ArrayList<Integer>();
-    private String mGravity;
+    protected List<Integer> mLineWidth = new ArrayList<Integer>();
+    private int mGravity;
+    private List<View> lineViews = new ArrayList<>();
 
     public FlowLayout(Context context, AttributeSet attrs, int defStyle)
     {
         super(context, attrs, defStyle);
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.TagFlowLayout);
-        mGravity = ta.getString(R.styleable.TagFlowLayout_gravity);
-        if (mGravity == null)
-            mGravity = getResources().getString(R.string.gravity_left);
+        mGravity = ta.getInt(R.styleable.TagFlowLayout_gravity,LEFT);
         ta.recycle();
     }
 
@@ -105,13 +109,12 @@ public class FlowLayout extends ViewGroup
     {
         mAllViews.clear();
         mLineHeight.clear();
+        lineViews.clear();
 
         int width = getWidth();
 
         int lineWidth = 0;
         int lineHeight = 0;
-
-        List<View> lineViews = new ArrayList<View>();
 
         int cCount = getChildCount();
 
@@ -129,6 +132,7 @@ public class FlowLayout extends ViewGroup
             {
                 mLineHeight.add(lineHeight);
                 mAllViews.add(lineViews);
+                mLineWidth.add(lineWidth);
 
                 lineWidth = 0;
                 lineHeight = childHeight + lp.topMargin + lp.bottomMargin;
@@ -141,7 +145,9 @@ public class FlowLayout extends ViewGroup
 
         }
         mLineHeight.add(lineHeight);
+        mLineWidth.add(lineWidth);
         mAllViews.add(lineViews);
+
 
 
         int left = getPaddingLeft();
@@ -154,7 +160,20 @@ public class FlowLayout extends ViewGroup
             lineViews = mAllViews.get(i);
             lineHeight = mLineHeight.get(i);
 
-            left = getStartLeft(lineViews);
+            // set gravity
+            int currentLineWidth = this.mLineWidth.get(i);
+            switch (this.mGravity){
+                case LEFT:
+                    left = getPaddingLeft();
+                    break;
+                case CENTER:
+                    left = (width - currentLineWidth)/2+getPaddingLeft();
+                    break;
+                case RIGHT:
+                    left = width - currentLineWidth + getPaddingLeft();
+                    break;
+            }
+
             for (int j = 0; j < lineViews.size(); j++)
             {
                 View child = lineViews.get(j);
@@ -179,35 +198,6 @@ public class FlowLayout extends ViewGroup
             top += lineHeight;
         }
 
-    }
-
-    private int getStartLeft(List<View> lineViews) {
-        int left = getPaddingLeft();
-
-        int needWidth = 0;
-        for (int j = 0; j < lineViews.size(); j++) {
-            View child = lineViews.get(j);
-            if (child.getVisibility() == View.GONE) {
-                continue;
-            }
-
-            MarginLayoutParams lp = (MarginLayoutParams) child
-                    .getLayoutParams();
-            needWidth += child.getMeasuredWidth() + lp.leftMargin
-                    + lp.rightMargin;
-        }
-
-        needWidth += getPaddingLeft() + getPaddingRight();
-        if (mGravity.equals(getResources().getString(R.string.gravity_center))) {
-            if (getMeasuredWidth() > needWidth) {
-                left += (getMeasuredWidth() - needWidth) / 2;
-            }
-        } else if (mGravity.equals(getResources().getString(R.string.gravity_right))) {
-            if (getMeasuredWidth() > needWidth) {
-                left += getMeasuredWidth() - needWidth;
-            }
-        }
-        return left;
     }
 
     @Override
