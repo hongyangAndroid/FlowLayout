@@ -15,6 +15,7 @@ public class FlowLayout extends ViewGroup
     protected List<List<View>> mAllViews = new ArrayList<List<View>>();
     protected List<Integer> mLineHeight = new ArrayList<Integer>();
     private String mGravity;
+    private List<View> lineViews = new ArrayList<>();
 
     public FlowLayout(Context context, AttributeSet attrs, int defStyle)
     {
@@ -105,13 +106,12 @@ public class FlowLayout extends ViewGroup
     {
         mAllViews.clear();
         mLineHeight.clear();
+        lineViews.clear();
 
         int width = getWidth();
 
         int lineWidth = 0;
         int lineHeight = 0;
-
-        List<View> lineViews = new ArrayList<View>();
 
         int cCount = getChildCount();
 
