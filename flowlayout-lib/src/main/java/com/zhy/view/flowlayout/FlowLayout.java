@@ -200,6 +200,30 @@ public class FlowLayout extends ViewGroup
 
     }
 
+    /**
+     * the all child views of FlowLayout
+     *
+     * @return List
+     */
+    public List<List<View>> getAllViews()
+    {
+        return this.mAllViews;
+    }
+
+    /**
+     * the lines of FlowLayout
+     *
+     * @return int
+     */
+    public int getLinesCount()
+    {
+        if(this.mAllViews!=null&&this.mAllViews.size()>0){
+            return this.mAllViews.size();
+        }else {
+            return 0;
+        }
+    }
+
     @Override
     public LayoutParams generateLayoutParams(AttributeSet attrs)
     {
