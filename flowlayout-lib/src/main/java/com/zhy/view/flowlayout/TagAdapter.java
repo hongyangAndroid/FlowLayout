@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public abstract class TagAdapter<T>
 {
@@ -39,6 +40,12 @@ public abstract class TagAdapter<T>
             mCheckedPosList.add(pos[i]);
         notifyDataChanged();
     }
+	public void setSelectedList(Set<Integer> set)
+    {
+		mCheckedPosList.clear();
+		mCheckedPosList.addAll(set);
+		notifyDataChanged();
+	}
 
     HashSet<Integer> getPreCheckedList()
     {
