@@ -109,6 +109,7 @@ public class FlowLayout extends ViewGroup
     {
         mAllViews.clear();
         mLineHeight.clear();
+        mLineWidth.clear();
         lineViews.clear();
 
         int width = getWidth();
