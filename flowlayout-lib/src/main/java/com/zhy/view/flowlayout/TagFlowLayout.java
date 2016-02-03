@@ -130,7 +130,18 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
 //            lp.leftMargin = clp.leftMargin;
 //            lp.rightMargin = clp.rightMargin;
             tagView.setDuplicateParentStateEnabled(true);
-            tagViewContainer.setLayoutParams(tagView.getLayoutParams());
+            if(tagView.getLayoutParams()!=null)
+            {
+                tagViewContainer.setLayoutParams(tagView.getLayoutParams());
+            }else
+            {
+                MarginLayoutParams lp=new MarginLayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+                lp.setMargins(dip2px(getContext(), 5),
+                        dip2px(getContext(), 5),
+                        dip2px(getContext(), 5),
+                        dip2px(getContext(), 5));
+                tagViewContainer.setLayoutParams(lp);
+            }
             tagViewContainer.addView(tagView);
             addView(tagViewContainer);
 
@@ -308,8 +319,12 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
     @Override
     public void onChanged()
     {
+        mSelectedView.clear();
         changeAdapter();
     }
 
-
+    public static int dip2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
+    }
 }
