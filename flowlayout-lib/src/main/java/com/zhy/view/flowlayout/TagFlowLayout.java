@@ -130,12 +130,12 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
 //            lp.leftMargin = clp.leftMargin;
 //            lp.rightMargin = clp.rightMargin;
             tagView.setDuplicateParentStateEnabled(true);
-            if(tagView.getLayoutParams()!=null)
+            if (tagView.getLayoutParams() != null)
             {
                 tagViewContainer.setLayoutParams(tagView.getLayoutParams());
-            }else
+            } else
             {
-                MarginLayoutParams lp=new MarginLayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+                MarginLayoutParams lp = new MarginLayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
                 lp.setMargins(dip2px(getContext(), 5),
                         dip2px(getContext(), 5),
                         dip2px(getContext(), 5),
@@ -146,7 +146,7 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
             addView(tagViewContainer);
 
 
-            if(preCheckedList.contains(i))
+            if (preCheckedList.contains(i))
             {
                 tagViewContainer.setChecked(true);
             }
@@ -211,7 +211,7 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
             if (!child.isChecked())
             {
                 //处理max_select=1的情况
-                if(mSelectedMax == 1 && mSelectedView.size() == 1)
+                if (mSelectedMax == 1 && mSelectedView.size() == 1)
                 {
                     Iterator<Integer> iterator = mSelectedView.iterator();
                     Integer preIndex = iterator.next();
@@ -220,7 +220,7 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
                     child.setChecked(true);
                     mSelectedView.remove(preIndex);
                     mSelectedView.add(position);
-                }else
+                } else
                 {
                     if (mSelectedMax > 0 && mSelectedView.size() >= mSelectedMax)
                         return;
@@ -278,7 +278,8 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
                     mSelectedView.add(index);
 
                     TagView tagView = (TagView) getChildAt(index);
-                    tagView.setChecked(true);
+                    if (tagView != null)
+                        tagView.setChecked(true);
                 }
 
             }
@@ -323,7 +324,8 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
         changeAdapter();
     }
 
-    public static int dip2px(Context context, float dpValue) {
+    public static int dip2px(Context context, float dpValue)
+    {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }

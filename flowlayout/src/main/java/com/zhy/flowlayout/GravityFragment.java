@@ -21,10 +21,6 @@ public class GravityFragment extends Fragment {
         return ourInstance;
     }
 
-    private GravityFragment(){
-
-    }
-
     private View self;
 
     @Nullable
