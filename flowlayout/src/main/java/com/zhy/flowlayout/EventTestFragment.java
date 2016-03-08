@@ -51,6 +51,12 @@ public class EventTestFragment extends Fragment
                 tv.setText(s);
                 return tv;
             }
+
+            @Override
+            public boolean setSelected(int position, String s)
+            {
+                return s.equals("Android");
+            }
         });
 
         mFlowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener()

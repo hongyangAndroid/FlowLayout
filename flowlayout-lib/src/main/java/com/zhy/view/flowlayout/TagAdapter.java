@@ -40,12 +40,13 @@ public abstract class TagAdapter<T>
             mCheckedPosList.add(pos[i]);
         notifyDataChanged();
     }
-	public void setSelectedList(Set<Integer> set)
+
+    public void setSelectedList(Set<Integer> set)
     {
-		mCheckedPosList.clear();
-		mCheckedPosList.addAll(set);
-		notifyDataChanged();
-	}
+        mCheckedPosList.clear();
+        mCheckedPosList.addAll(set);
+        notifyDataChanged();
+    }
 
     HashSet<Integer> getPreCheckedList()
     {
@@ -69,5 +70,11 @@ public abstract class TagAdapter<T>
     }
 
     public abstract View getView(FlowLayout parent, int position, T t);
+
+    public boolean setSelected(int position ,T t)
+    {
+        return false;
+    }
+
 
 }
