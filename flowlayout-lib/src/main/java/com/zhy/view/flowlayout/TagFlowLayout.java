@@ -245,6 +245,12 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
         }
     }
 
+    public TagAdapter getAdapter()
+    {
+        return mTagAdapter;
+    }
+
+
     private static final String KEY_CHOOSE_POS = "key_choose_pos";
     private static final String KEY_DEFAULT = "key_default";
 

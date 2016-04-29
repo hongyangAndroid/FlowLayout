@@ -43,8 +43,10 @@ public abstract class TagAdapter<T>
 
     public void setSelectedList(Set<Integer> set)
     {
+
         mCheckedPosList.clear();
-        mCheckedPosList.addAll(set);
+        if (set != null)
+            mCheckedPosList.addAll(set);
         notifyDataChanged();
     }
 
@@ -71,7 +73,7 @@ public abstract class TagAdapter<T>
 
     public abstract View getView(FlowLayout parent, int position, T t);
 
-    public boolean setSelected(int position ,T t)
+    public boolean setSelected(int position, T t)
     {
         return false;
     }

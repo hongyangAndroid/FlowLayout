@@ -24,4 +24,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.1'
     compile project(':flowlayout-lib')
     compile 'com.android.support:design:22.2.0'
+    compile 'com.zhy:base-adapter:2.0.1'
 }

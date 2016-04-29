@@ -1,0 +1,15 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:zhy="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.zhy.view.flowlayout.TagFlowLayout
+        android:id="@+id/id_flowlayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+	android:padding="20dp"
+        zhy:max_select="-1"
+        >
+    </com.zhy.view.flowlayout.TagFlowLayout>
+</LinearLayout>
