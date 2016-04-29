@@ -24,7 +24,7 @@ public abstract class TagAdapter<T>
         mTagDatas = new ArrayList<T>(Arrays.asList(datas));
     }
 
-    static interface OnDataChangedListener
+    interface OnDataChangedListener
     {
         void onChanged();
     }
@@ -34,16 +34,18 @@ public abstract class TagAdapter<T>
         mOnDataChangedListener = listener;
     }
 
-    public void setSelectedList(int... pos)
+    public void setSelectedList(int... poses)
     {
-        for (int i = 0; i < pos.length; i++)
-            mCheckedPosList.add(pos[i]);
-        notifyDataChanged();
+        Set<Integer> set = new HashSet<>();
+        for (int pos : poses)
+        {
+            set.add(pos);
+        }
+        setSelectedList(set);
     }
 
     public void setSelectedList(Set<Integer> set)
     {
-
         mCheckedPosList.clear();
         if (set != null)
             mCheckedPosList.addAll(set);
@@ -77,6 +79,7 @@ public abstract class TagAdapter<T>
     {
         return false;
     }
+
 
 
 }

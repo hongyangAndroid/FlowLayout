@@ -53,25 +53,18 @@ public class ListViewTestFragment extends Fragment
             {
                 TagFlowLayout tagFlowLayout = viewHolder.getView(R.id.id_tagflowlayout);
 
-                TagAdapter<String> tagAdapter;
-                if (tagFlowLayout.getAdapter() == null)
+                TagAdapter<String> tagAdapter = new TagAdapter<String>(strings)
                 {
-                    tagAdapter = new TagAdapter<String>(strings)
+                    @Override
+                    public View getView(FlowLayout parent, int position, String o)
                     {
-                        @Override
-                        public View getView(FlowLayout parent, int position, String o)
-                        {
-                            //can use viewholder
-                            TextView tv = (TextView) mInflater.inflate(R.layout.tv,
-                                    parent, false);
-                            tv.setText(o);
-                            return tv;
-                        }
-                    };
-                } else
-                {
-                    tagAdapter = tagFlowLayout.getAdapter();
-                }
+                        //can use viewholder
+                        TextView tv = (TextView) mInflater.inflate(R.layout.tv,
+                                parent, false);
+                        tv.setText(o);
+                        return tv;
+                    }
+                };
                 tagFlowLayout.setAdapter(tagAdapter);
                 //重置状态
                 tagAdapter.setSelectedList(selectedMap.get(viewHolder.getItemPosition()));

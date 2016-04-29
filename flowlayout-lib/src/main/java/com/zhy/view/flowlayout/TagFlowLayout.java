@@ -91,7 +91,6 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
 
     private OnTagClickListener mOnTagClickListener;
 
-
     public void setOnTagClickListener(OnTagClickListener onTagClickListener)
     {
         mOnTagClickListener = onTagClickListener;
@@ -101,8 +100,6 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
 
     public void setAdapter(TagAdapter adapter)
     {
-        //if (mTagAdapter == adapter)
-        //  return;
         mTagAdapter = adapter;
         mTagAdapter.setOnDataChangedListener(this);
         mSelectedView.clear();
