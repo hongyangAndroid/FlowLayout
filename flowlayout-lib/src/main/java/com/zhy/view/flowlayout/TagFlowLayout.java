@@ -155,7 +155,9 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
 
             if (preCheckedList.contains(i))
             {
-                if (!tagView.isEnabled()||selectNum>mSelectedMax){
+                if (!tagView.isEnabled()){
+                    preCheckedList.remove(i);
+                }else if(mSelectedMax!=-1&&selectNum>mSelectedMax){
                     preCheckedList.remove(i);
                 }else {
                     selectNum++;
