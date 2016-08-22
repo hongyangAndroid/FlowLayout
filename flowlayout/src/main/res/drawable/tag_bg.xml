@@ -3,9 +3,11 @@
     <item
         android:drawable="@drawable/checked_bg"
         android:state_checked="true"
-        >
+    >
 
     </item>
     <item
-          android:drawable="@drawable/normal_bg"></item>
+        android:drawable="@drawable/normal_bg"></item>
+    <item android:drawable="@drawable/unable_bg"
+          android:state_enabled="false"/>
 </selector>
