@@ -1,4 +1,4 @@
-package com.zhy.view.flowlayout;
+package com.koalac.dispatcher.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -11,13 +11,17 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.koalac.dispatcher.R;
+import com.zhy.view.flowlayout.FlowLayout;
+import com.zhy.view.flowlayout.TagView;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-/**
- * Created by zhy on 15/9/10.
- */
+
+
+
 public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChangedListener
 {
     private TagAdapter mTagAdapter;
@@ -91,6 +95,22 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
 
     private OnTagClickListener mOnTagClickListener;
 
+
+
+    public interface OnLongTagClickListener
+    {
+        boolean onLongTagClick(View view, int position, FlowLayout parent);
+    }
+
+    private OnLongTagClickListener mOnLongTagClickListener;
+
+
+    public void setOnLongTagClickListener(OnLongTagClickListener onLongTagClickListener) {
+        mOnLongTagClickListener = onLongTagClickListener;
+        if (mOnLongTagClickListener != null) setLongClickable(true);
+
+    }
+
     public void setOnTagClickListener(OnTagClickListener onTagClickListener)
     {
         mOnTagClickListener = onTagClickListener;
@@ -100,13 +120,15 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
 
     public void setAdapter(TagAdapter adapter)
     {
+        //if (mTagAdapter == adapter)
+        //  return;
         mTagAdapter = adapter;
         mTagAdapter.setOnDataChangedListener(this);
         mSelectedView.clear();
         changeAdapter();
 
     }
-
+    @SuppressWarnings("ResourceType")
     private void changeAdapter()
     {
         removeAllViews();
@@ -162,7 +184,7 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
-        if (event.getAction() == MotionEvent.ACTION_UP)
+        if (event.getAction() == MotionEvent.ACTION_UP||event.getAction() == MotionEvent.ACTION_DOWN)
         {
             mMotionEvent = MotionEvent.obtain(event);
         }
@@ -172,25 +194,47 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
     @Override
     public boolean performClick()
     {
-        if (mMotionEvent == null) return super.performClick();
+        if (mMotionEvent != null&&mMotionEvent.getAction() == MotionEvent.ACTION_UP){
+            TagView child = getChildByMotionEvent();
+            int pos = findPosByView(child);
+            if (child != null)
+            {
+                doSelect(child, pos);
+                if (mOnTagClickListener != null)
+                {
+                    return mOnTagClickListener.onTagClick(child.getTagView(), pos, this);
+                }
+            }
+            return true;
+        }
+            return super.performClick();
+    }
 
+    @Override
+    public boolean performLongClick() {
+        if (mMotionEvent != null&&mMotionEvent.getAction() == MotionEvent.ACTION_DOWN){
+            TagView child = getChildByMotionEvent();
+            int pos = findPosByView(child);
+            if (child != null)
+            {
+                if (mOnLongTagClickListener != null)
+                {
+                    return mOnLongTagClickListener.onLongTagClick(child.getTagView(), pos, this);
+                }
+            }
+            return true;
+        }
+        return super.performLongClick();
+    }
+
+
+    private TagView getChildByMotionEvent() {
         int x = (int) mMotionEvent.getX();
         int y = (int) mMotionEvent.getY();
         mMotionEvent = null;
 
-        TagView child = findChild(x, y);
-        int pos = findPosByView(child);
-        if (child != null)
-        {
-            doSelect(child, pos);
-            if (mOnTagClickListener != null)
-            {
-                return mOnTagClickListener.onTagClick(child.getTagView(), pos, this);
-            }
-        }
-        return true;
+        return findChild(x, y);
     }
-
 
     public void setMaxSelectCount(int count)
     {
