@@ -2,6 +2,7 @@ package com.zhy.view.flowlayout;
 
 import android.view.View;
 
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -64,8 +65,9 @@ public abstract class TagAdapter<T>
     }
 
     public void notifyDataChanged()
-    {
-        mOnDataChangedListener.onChanged();
+    {   
+        if(mOnDataChangedListener != null)
+            mOnDataChangedListener.onChanged();
     }
 
     public T getItem(int position)
