@@ -69,7 +69,7 @@ public class FlowLayout extends ViewGroup
                 }
                 continue;
             }
-            measureChild(child, widthMeasureSpec, heightMeasureSpec);
+            measureChildWithMargins(child, widthMeasureSpec, 0, heightMeasureSpec, 0);
             MarginLayoutParams lp = (MarginLayoutParams) child
                     .getLayoutParams();
 
