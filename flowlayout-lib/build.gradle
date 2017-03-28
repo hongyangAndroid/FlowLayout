@@ -5,7 +5,7 @@ apply plugin: 'com.jfrog.bintray'
 version = "1.0.3"
 android {
     compileSdkVersion 22
-    buildToolsVersion "23.0.0 rc3"
+    buildToolsVersion '23.0.3'
 
     defaultConfig {
         minSdkVersion 10
@@ -22,7 +22,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:22.2.1'
 }
 

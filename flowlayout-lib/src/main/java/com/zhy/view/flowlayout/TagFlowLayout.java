@@ -3,6 +3,7 @@ package com.zhy.view.flowlayout;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Rect;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.TextUtils;
@@ -112,7 +113,8 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
         removeAllViews();
         TagAdapter adapter = mTagAdapter;
         TagView tagViewContainer = null;
-        HashSet preCheckedList = mTagAdapter.getPreCheckedList();
+        HashSet<Integer> preCheckedList = mTagAdapter.getPreCheckedList();
+        int selectNum=0;//设置已选中的数量，不超过maxSelect
         for (int i = 0; i < adapter.getCount(); i++)
         {
             View tagView = adapter.getView(this, i, adapter.getItem(i));
@@ -142,10 +144,25 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
             tagViewContainer.addView(tagView);
             addView(tagViewContainer);
 
+            if (!tagView.isEnabled()){
+                tagViewContainer.setEnabled(false);
+                if (Build.VERSION.SDK_INT>=11){
+                    tagViewContainer.setAlpha(0.5f);
+                }else {
+                    //
+                }
+            }
 
             if (preCheckedList.contains(i))
             {
-                tagViewContainer.setChecked(true);
+                if (!tagView.isEnabled()){
+                    preCheckedList.remove(i);
+                }else if(mSelectedMax!=-1&&selectNum>mSelectedMax){
+                    preCheckedList.remove(i);
+                }else {
+                    selectNum++;
+                    tagViewContainer.setChecked(true);
+                }
             }
 
             if (mTagAdapter.setSelected(i, adapter.getItem(i)))
@@ -180,7 +197,7 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
 
         TagView child = findChild(x, y);
         int pos = findPosByView(child);
-        if (child != null)
+        if (child != null&&child.isEnabled())
         {
             doSelect(child, pos);
             if (mOnTagClickListener != null)

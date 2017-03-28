@@ -13,6 +13,13 @@
             <option value="$PROJECT_DIR$/flowlayout-lib" />
           </set>
         </option>
+        <option name="myModules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/flowlayout" />
+            <option value="$PROJECT_DIR$/flowlayout-lib" />
+          </set>
+        </option>
       </GradleProjectSettings>
     </option>
   </component>
