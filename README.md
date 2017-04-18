@@ -4,7 +4,7 @@
 Android流式布局，支持单选、多选等，适合用于产品标签等。
 
 
-##特色
+## 特色
 * 以setAdapter形式注入数据
 * 直接设置selector为background即可完成标签选则的切换，类似CheckBox
 * 支持控制选择的Tag数量，比如：单选、多选
@@ -13,7 +13,7 @@ Android流式布局，支持单选、多选等，适合用于产品标签等。
 * 支持adapter.notifyDataChanged
 * Activity重建（或者旋转）后，选择的状态自动保存
 
-##效果图
+## 效果图
 
 <img src="flowlayout_03.gif" width="320px"/>
 
@@ -45,7 +45,7 @@ dependencies {
 `max_select`：-1为不限制选择数量，>=1的数字为控制选择tag的数量
 `auto_select_effect` 是否开启默认的选中效果，即为selector中设置的效果，默认为true；如果设置为false，则无选中效果，需要自己在回调中处理。
 
-###设置数据
+### 设置数据
 
 ```java
 mFlowLayout.setAdapter(new TagAdapter<String>(mVals)
@@ -81,7 +81,7 @@ getView中回调，类似ListView等用法。
 设置个background，上面一个状态为android:state_checked，另一个为正常。写写布局文件我都嫌慢，怎么能写一堆代码控制效果，设置改个效果，岂不是没时间dota了。
 
 
-###事件
+### 事件
 
 ```java
 mFlowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener()
@@ -109,7 +109,7 @@ mFlowLayout.setOnSelectListener(new TagFlowLayout.OnSelectListener()
 ```
 选择多个标签时的回调。
 
-##预先设置Item选中
+## 预先设置Item选中
 
 ```java
 //预先设置选中
