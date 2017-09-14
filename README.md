@@ -23,7 +23,7 @@ Android流式布局，支持单选、多选等，适合用于产品标签等。
 
 ```java
 dependencies {
- compile 'com.zhy:flowlayout-lib:1.0.3'
+ compile 'com.hyman:flowlayout-lib:1.1.1'
 }
 ```
 
@@ -43,7 +43,9 @@ dependencies {
 支持属性：
 
 `max_select`：-1为不限制选择数量，>=1的数字为控制选择tag的数量
-`auto_select_effect` 是否开启默认的选中效果，即为selector中设置的效果，默认为true；如果设置为false，则无选中效果，需要自己在回调中处理。
+
+支持通过state=checked来控制选中和取消,也可以自己在Adapter
+的onSelected和unSelected中分别处理显示。
 
 ###设置数据
 
@@ -61,11 +63,10 @@ mFlowLayout.setAdapter(new TagAdapter<String>(mVals)
    });
 ```
 
+
 getView中回调，类似ListView等用法。
 
 ### 对于选中状态
-
-你还在复杂的写代码设置选中后标签的显示效果么，翔哥说No!
 
 ```java
 <?xml version="1.0" encoding="utf-8"?>
@@ -79,6 +80,22 @@ getView中回调，类似ListView等用法。
 ```
 
 设置个background，上面一个状态为android:state_checked，另一个为正常。写写布局文件我都嫌慢，怎么能写一堆代码控制效果，设置改个效果，岂不是没时间dota了。
+
+
+也可以不依赖state_checked,在下面的回调中自行设置:
+
+```
+#Adapter
+@Override
+public void onSelected(int position, View view) {
+    super.onSelected(position, view);
+}
+
+@Override
+public void unSelected(int position, View view) {
+    super.unSelected(position, view);
+}
+```
 
 
 ###事件

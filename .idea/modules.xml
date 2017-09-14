@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Github-FlowLayout.iml" filepath="$PROJECT_DIR$/Github-FlowLayout.iml" />
-      <module fileurl="file://$PROJECT_DIR$/flowlayout/flowlayout.iml" filepath="$PROJECT_DIR$/flowlayout/flowlayout.iml" />
-      <module fileurl="file://$PROJECT_DIR$/flowlayout-lib/flowlayout-lib.iml" filepath="$PROJECT_DIR$/flowlayout-lib/flowlayout-lib.iml" />
+      <module fileurl="file://$USER_HOME$/git-repo/mime/FlowLayout/FlowLayout.iml" filepath="$USER_HOME$/git-repo/mime/FlowLayout/FlowLayout.iml" />
+      <module fileurl="file://$USER_HOME$/git-repo/mime/FlowLayout/flowlayout/flowlayout.iml" filepath="$USER_HOME$/git-repo/mime/FlowLayout/flowlayout/flowlayout.iml" />
+      <module fileurl="file://$USER_HOME$/git-repo/mime/FlowLayout/flowlayout-lib/flowlayout-lib.iml" filepath="$USER_HOME$/git-repo/mime/FlowLayout/flowlayout-lib/flowlayout-lib.iml" />
     </modules>
   </component>
 </project>

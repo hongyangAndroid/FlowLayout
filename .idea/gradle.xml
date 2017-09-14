@@ -5,14 +5,14 @@
       <GradleProjectSettings>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleJvm" value="1.7" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/flowlayout" />
-            <option value="$PROJECT_DIR$/flowlayout-lib" />
+            <option value="$USER_HOME$/git-repo/mime/FlowLayout" />
+            <option value="$USER_HOME$/git-repo/mime/FlowLayout/flowlayout" />
+            <option value="$USER_HOME$/git-repo/mime/FlowLayout/flowlayout-lib" />
           </set>
         </option>
+        <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>
   </component>

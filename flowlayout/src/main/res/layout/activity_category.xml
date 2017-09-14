@@ -13,7 +13,7 @@
         app:tabGravity="fill"
         android:background="#ffffff"
         app:tabIndicatorColor="#0ddcff"
-        app:tabMode="fixed"
+        app:tabMode="scrollable"
         app:tabSelectedTextColor="#0ddcff"
         app:tabTextColor="#000000"/>
 
