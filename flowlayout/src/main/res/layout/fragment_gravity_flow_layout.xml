@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
-        app:gravity="left">
+        app:tag_gravity="left">
 
         <TextView
             android:layout_width="wrap_content"
@@ -71,7 +71,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
-        app:gravity="center">
+        app:tag_gravity="center">
 
         <TextView
             android:layout_width="wrap_content"
@@ -127,7 +127,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
-        app:gravity="right">
+        app:tag_gravity="right">
 
         <TextView
             android:layout_width="wrap_content"

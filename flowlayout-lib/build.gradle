@@ -27,7 +27,7 @@ publish {
     userOrg = 'hongyangandroid'//bintray.com用户名
     groupId = 'com.hyman'//jcenter上的路径
     artifactId = 'flowlayout-lib'//项目名称
-    publishVersion = '1.1.1'//版本号
+    publishVersion = '1.1.2'//版本号
     desc = 'save time'
     website = 'https://github.com/hongyangAndroid/FlowLayout'
 }
