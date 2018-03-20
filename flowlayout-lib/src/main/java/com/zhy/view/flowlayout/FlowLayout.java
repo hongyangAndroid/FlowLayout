@@ -168,7 +168,7 @@ public class FlowLayout extends ViewGroup {
                     break;
                 case RIGHT:
                     //  适配了rtl，需要补偿一个padding值
-                    left = width - currentLineWidth + getPaddingLeft() - getPaddingLeft();
+                    left = width - (currentLineWidth + getPaddingLeft()) - getPaddingRight();
                     //  适配了rtl，需要把lineViews里面的数组倒序排
                     Collections.reverse(lineViews);
                     break;
