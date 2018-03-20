@@ -7,9 +7,9 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
-            <option value="$USER_HOME$/git-repo/mime/FlowLayout" />
-            <option value="$USER_HOME$/git-repo/mime/FlowLayout/flowlayout" />
-            <option value="$USER_HOME$/git-repo/mime/FlowLayout/flowlayout-lib" />
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/flowlayout" />
+            <option value="$PROJECT_DIR$/flowlayout-lib" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
