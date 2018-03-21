@@ -5,3 +5,6 @@
 .DS_Store
 /build
 /captures
+/.idea/inspectionProfiles/
+/.idea/smartfox_info.xml
+
