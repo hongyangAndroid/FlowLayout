@@ -98,7 +98,7 @@ public class TagFlowLayout extends FlowLayout
             View tagView = adapter.getView(this, i, adapter.getItem(i));
 
             tagViewContainer = new TagView(getContext());
-            tagView.setDuplicateParentStateEnabled(true);
+            setDuplicateParentStateEnabled(tagView);
             if (tagView.getLayoutParams() != null) {
                 tagViewContainer.setLayoutParams(tagView.getLayoutParams());
 
@@ -140,6 +140,14 @@ public class TagFlowLayout extends FlowLayout
             });
         }
         mSelectedView.addAll(preCheckedList);
+    }
+    private void setDuplicateParentStateEnabled(View view) {
+        view.setDuplicateParentStateEnabled(true);
+        if (view instanceof ViewGroup) {
+            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+                setDuplicateParentStateEnabled(((ViewGroup) view).getChildAt(i));
+            }
+        }
     }
 
     public void setMaxSelectCount(int count) {
