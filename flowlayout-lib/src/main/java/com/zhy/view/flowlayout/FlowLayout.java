@@ -183,8 +183,8 @@ public class FlowLayout extends ViewGroup {
                 MarginLayoutParams lp = (MarginLayoutParams) child
                         .getLayoutParams();
 
-                int lc = left + lp.leftMargin;
-                int tc = top + lp.topMargin;
+                int lc = left ;//+ lp.leftMargin;
+                int tc = top ;//+ lp.topMargin;
                 int rc = lc + child.getMeasuredWidth();
                 int bc = tc + child.getMeasuredHeight();
 
