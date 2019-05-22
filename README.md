@@ -3,8 +3,15 @@
 # FlowLayout
 Android流式布局，支持单选、多选等，适合用于产品标签等。
 
+## 关于Fork
+新增了标签间padding支持
 
-##特色
+| 属性               | 说明                |
+| ------------------ | ------------------- |
+| horizontal_padding | 标签之间水平padding |
+| vertical_padding   | 标签之间垂直padding |
+
+## 特色
 * 以setAdapter形式注入数据
 * 直接设置selector为background即可完成标签选则的切换，类似CheckBox
 * 支持控制选择的Tag数量，比如：单选、多选
@@ -13,7 +20,7 @@ Android流式布局，支持单选、多选等，适合用于产品标签等。
 * 支持adapter.notifyDataChanged
 * Activity重建（或者旋转）后，选择的状态自动保存
 
-##效果图
+## 效果图
 
 <img src="flowlayout_03.gif" width="320px"/>
 
@@ -47,7 +54,7 @@ dependencies {
 支持通过state=checked来控制选中和取消,也可以自己在Adapter
 的onSelected和unSelected中分别处理显示。
 
-###设置数据
+### 设置数据
 
 ```java
 mFlowLayout.setAdapter(new TagAdapter<String>(mVals)
@@ -98,7 +105,7 @@ public void unSelected(int position, View view) {
 ```
 
 
-###事件
+### 事件
 
 ```java
 mFlowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener()
@@ -126,7 +133,7 @@ mFlowLayout.setOnSelectListener(new TagFlowLayout.OnSelectListener()
 ```
 选择多个标签时的回调。
 
-##预先设置Item选中
+## 预先设置Item选中
 
 ```java
 //预先设置选中
@@ -134,6 +141,10 @@ mAdapter.setSelectedList(1,3,5,7,8,9);
 //获得所有选中的pos集合
 flowLayout.getSelectedList();
 ```
+
+
+
+
 
 
 
