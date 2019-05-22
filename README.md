@@ -3,40 +3,6 @@
 # FlowLayout
 Android流式布局，支持单选、多选等，适合用于产品标签等。
 
-## 关于Fork
-新增了标签间padding支持与水平自动拉伸
-
-| 属性               | 单位    | 说明                                                         |
-| ------------------ | ------- | ------------------------------------------------------------ |
-| horizontal_padding | dp      | 标签之间水平padding                                          |
-| vertical_padding   | dp      | 标签之间垂直padding                                          |
-| auto_stretch       | boolean | 是否水平平铺标签，会忽略horizontal_padding以及tag的margin属性 |
-
-### horizontal_padding与vertical_padding示例
-```
-<com.zhy.view.flowlayout.TagFlowLayout
-     android:id="@+id/id_flowlayout"
-     android:layout_width="fill_parent"
-     android:layout_height="wrap_content"
-     zhy:vertical_padding="17dp"
-     zhy:horizontal_padding="17dp"
-     zhy:max_select="-1"/>
-```
-<img src="horizontal_padding_and_vertical_padding_sample.png" width="320px"/>
-
-### auto_stretch示例
-```
-<com.zhy.view.flowlayout.TagFlowLayout
-       android:id="@+id/id_flowlayout"
-       android:layout_width="fill_parent"
-       android:layout_height="wrap_content"
-       zhy:vertical_padding="17dp"
-       zhy:horizontal_padding="17dp"
-       zhy:auto_stretch="true"
-       zhy:max_select="-1"/>
-```
-<img src="auto_stretch_sample.png" width="320px"/>
-
 ## 特色
 
 * 以setAdapter形式注入数据
@@ -53,6 +19,10 @@ Android流式布局，支持单选、多选等，适合用于产品标签等。
 
 <img src="sc.png" width="320px"/>
 
+<img src="horizontal_padding_and_vertical_padding_sample.png" width="320px"/>
+
+<img src="auto_stretch_sample.png" width="320px"/>
+
 ## 用法
 
 ```java
@@ -64,26 +34,34 @@ dependencies {
 ### 声明
 布局文件中声明：
 
-```java
- <com.zhy.view.flowlayout.TagFlowLayout
-        android:id="@+id/id_flowlayout"
-        zhy:max_select="-1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:padding="20dp">
-    </com.zhy.view.flowlayout.TagFlowLayout>
+```
+<com.zhy.view.flowlayout.TagFlowLayout
+    android:id="@+id/id_flowlayout"
+    zhy:max_select="-1"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    zhy:vertical_padding="17dp"
+    zhy:horizontal_padding="17dp"
+    zhy:auto_stretch="true"
+    android:padding="20dp">
+</com.zhy.view.flowlayout.TagFlowLayout>
 ```
 
 支持属性：
 
-`max_select`：-1为不限制选择数量，>=1的数字为控制选择tag的数量
+| 属性               | 单位    | 说明                                                         |
+| ------------------ | ------- | ------------------------------------------------------------ |
+| max_select         | integer | -1为不限制选择数量，>=1的数字为控制选择tag的数量 |
+| horizontal_padding | dp      | 标签之间水平padding                                          |
+| vertical_padding   | dp      | 标签之间垂直padding                                          |
+| auto_stretch       | boolean | 是否水平平铺标签，会忽略horizontal_padding以及标签的margin水平属性 |
 
 支持通过state=checked来控制选中和取消,也可以自己在Adapter
 的onSelected和unSelected中分别处理显示。
 
 ### 设置数据
 
-```java
+```
 mFlowLayout.setAdapter(new TagAdapter<String>(mVals)
    {
        @Override
@@ -102,7 +80,7 @@ getView中回调，类似ListView等用法。
 
 ### 对于选中状态
 
-```java
+```
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:color="@color/tag_select_textcolor"
@@ -134,7 +112,7 @@ public void unSelected(int position, View view) {
 
 ### 事件
 
-```java
+```
 mFlowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener()
 {
   @Override
@@ -148,7 +126,7 @@ mFlowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener()
 
 点击标签时的回调。
 
-```java
+```
 mFlowLayout.setOnSelectListener(new TagFlowLayout.OnSelectListener()
 {
   @Override
@@ -162,7 +140,7 @@ mFlowLayout.setOnSelectListener(new TagFlowLayout.OnSelectListener()
 
 ## 预先设置Item选中
 
-```java
+```
 //预先设置选中
 mAdapter.setSelectedList(1,3,5,7,8,9);
 //获得所有选中的pos集合

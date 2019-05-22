@@ -189,11 +189,15 @@ public class FlowLayout extends ViewGroup {
                     if (child.getVisibility() == View.GONE) {
                         continue;
                     }
-                    int lc = left;
-                    int rc = lc + child.getMeasuredWidth();
-                    int bc = top + child.getMeasuredHeight();
+                    MarginLayoutParams lp = (MarginLayoutParams) child
+                            .getLayoutParams();
 
-                    child.layout(lc, top, rc, bc);
+                    int lc = left + lp.leftMargin;
+                    int tc = top + lp.topMargin;
+                    int rc = lc + child.getMeasuredWidth();
+                    int bc = tc + child.getMeasuredHeight();
+
+                    child.layout(lc, tc, rc, bc);
 
                     left += child.getMeasuredWidth() + gap;
                 }
