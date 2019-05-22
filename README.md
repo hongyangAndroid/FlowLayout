@@ -54,7 +54,7 @@ dependencies {
 | max_select         | integer | -1为不限制选择数量，>=1的数字为控制选择tag的数量 |
 | horizontal_padding | dp      | 标签之间水平padding                                          |
 | vertical_padding   | dp      | 标签之间垂直padding                                          |
-| auto_stretch       | boolean | 是否水平平铺标签，会忽略horizontal_padding以及标签的margin水平属性 |
+| auto_stretch       | boolean | 标签两端对齐，中间间隙均分 |
 
 支持通过state=checked来控制选中和取消,也可以自己在Adapter
 的onSelected和unSelected中分别处理显示。
