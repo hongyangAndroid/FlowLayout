@@ -4,14 +4,41 @@
 Android流式布局，支持单选、多选等，适合用于产品标签等。
 
 ## 关于Fork
-新增了标签间padding支持
+新增了标签间padding支持与水平自定拉伸
 
-| 属性               | 说明                |
-| ------------------ | ------------------- |
-| horizontal_padding | 标签之间水平padding |
-| vertical_padding   | 标签之间垂直padding |
+| 属性               | 单位    | 说明                                                         |
+| ------------------ | ------- | ------------------------------------------------------------ |
+| horizontal_padding | dp      | 标签之间水平padding                                          |
+| vertical_padding   | dp      | 标签之间垂直padding                                          |
+| auto_stretch       | boolean | 是否水平平铺标签，会忽略horizontal_padding以及tag的margin属性 |
+
+### horizontal_padding与vertical_padding示例
+```
+<com.zhy.view.flowlayout.TagFlowLayout
+     android:id="@+id/id_flowlayout"
+     android:layout_width="fill_parent"
+     android:layout_height="wrap_content"
+     zhy:vertical_padding="17dp"
+     zhy:horizontal_padding="17dp"
+     zhy:max_select="-1"/>
+```
+<img src="horizontal_padding_and_vertical_padding_sample.png" width="320px"/>
+
+### auto_stretch示例
+```
+<com.zhy.view.flowlayout.TagFlowLayout
+       android:id="@+id/id_flowlayout"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       zhy:vertical_padding="17dp"
+       zhy:horizontal_padding="17dp"
+       zhy:auto_stretch="true"
+       zhy:max_select="-1"/>
+```
+<img src="auto_stretch_sample.png" width="320px"/>
 
 ## 特色
+
 * 以setAdapter形式注入数据
 * 直接设置selector为background即可完成标签选则的切换，类似CheckBox
 * 支持控制选择的Tag数量，比如：单选、多选
