@@ -7,5 +7,7 @@
             <enum name="center" value="0" />
             <enum name="right" value="1" />
         </attr>
+        <attr name="vertical_padding" format="dimension" />
+        <attr name="horizontal_padding" format="dimension" />
     </declare-styleable>
 </resources>
