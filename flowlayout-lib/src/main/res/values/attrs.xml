@@ -9,5 +9,6 @@
         </attr>
         <attr name="vertical_padding" format="dimension" />
         <attr name="horizontal_padding" format="dimension" />
+        <attr name="auto_stretch" format="boolean" />
     </declare-styleable>
 </resources>
