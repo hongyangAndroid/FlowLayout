@@ -156,96 +156,57 @@ public class FlowLayout extends ViewGroup {
         mLineWidth.add(lineWidth);
         mAllViews.add(lineViews);
 
-
         int left = getPaddingLeft();
         int top = getPaddingTop();
 
         int lineNum = mAllViews.size();
 
-        if (mAutoStretch) {
-            for (int i = 0; i < lineNum; i++) {
-                lineViews = mAllViews.get(i);
-                lineHeight = mLineHeight.get(i);
+        for (int i = 0; i < lineNum; i++) {
+            lineViews = mAllViews.get(i);
+            lineHeight = mLineHeight.get(i);
 
-                int cTotalWidth = 0;
-                final int lineChildCount = lineViews.size();
-                for (int j = 0; j < lineChildCount; j++) {
-                    View child = lineViews.get(j);
-                    if (child.getVisibility() == View.GONE) {
-                        continue;
-                    }
-                    cTotalWidth += child.getMeasuredWidth();
-                }
-                int gap = 0;
-                if (lineChildCount > 1) {
-                    gap = (width - cTotalWidth) / (lineChildCount - 1);
-                }
-                left = getPaddingLeft();
-                if (this.mGravity == RIGHT) {
+            // set gravity
+            int currentLineWidth = this.mLineWidth.get(i);
+            switch (this.mGravity) {
+                case LEFT:
+                    left = getPaddingLeft();
+                    break;
+                case CENTER:
+                    left = (width - currentLineWidth) / 2 + getPaddingLeft();
+                    break;
+                case RIGHT:
+                    //  适配了rtl，需要补偿一个padding值
+                    left = width - (currentLineWidth + getPaddingLeft()) - getPaddingRight();
+                    //  适配了rtl，需要把lineViews里面的数组倒序排
                     Collections.reverse(lineViews);
-                }
-                for (int j = 0; j < lineChildCount; j++) {
-                    View child = lineViews.get(j);
-                    if (child.getVisibility() == View.GONE) {
-                        continue;
-                    }
-                    MarginLayoutParams lp = (MarginLayoutParams) child
-                            .getLayoutParams();
-
-                    int lc = left + lp.leftMargin;
-                    int tc = top + lp.topMargin;
-                    int rc = lc + child.getMeasuredWidth();
-                    int bc = tc + child.getMeasuredHeight();
-
-                    child.layout(lc, tc, rc, bc);
-
-                    left += child.getMeasuredWidth() + gap;
-                }
-                top += lineHeight;
+                    break;
             }
-        } else {
-            for (int i = 0; i < lineNum; i++) {
-                lineViews = mAllViews.get(i);
-                lineHeight = mLineHeight.get(i);
-
-                // set gravity
-                int currentLineWidth = this.mLineWidth.get(i);
-                switch (this.mGravity) {
-                    case LEFT:
-                        left = getPaddingLeft();
-                        break;
-                    case CENTER:
-                        left = (width - currentLineWidth) / 2 + getPaddingLeft();
-                        break;
-                    case RIGHT:
-                        //  适配了rtl，需要补偿一个padding值
-                        left = width - (currentLineWidth + getPaddingLeft()) - getPaddingRight();
-                        //  适配了rtl，需要把lineViews里面的数组倒序排
-                        Collections.reverse(lineViews);
-                        break;
-                }
-
-                for (int j = 0; j < lineViews.size(); j++) {
-                    View child = lineViews.get(j);
-                    if (child.getVisibility() == View.GONE) {
-                        continue;
-                    }
-
-                    MarginLayoutParams lp = (MarginLayoutParams) child
-                            .getLayoutParams();
-
-                    int lc = left + lp.leftMargin;
-                    int tc = top + lp.topMargin;
-                    int rc = lc + child.getMeasuredWidth();
-                    int bc = tc + child.getMeasuredHeight();
-
-                    child.layout(lc, tc, rc, bc);
-
-                    left += child.getMeasuredWidth() + lp.leftMargin
-                            + lp.rightMargin + mTagHorizontalPadding;
-                }
-                top += lineHeight;
+            int lineChildCount = lineViews.size();
+            int gap = 0;
+            if (lineChildCount > 1) {
+                gap = (width - currentLineWidth) / (lineChildCount - 1);
             }
+            for (int j = 0; j < lineChildCount; j++) {
+                View child = lineViews.get(j);
+                if (child.getVisibility() == View.GONE) {
+                    continue;
+                }
+
+                MarginLayoutParams lp = (MarginLayoutParams) child
+                        .getLayoutParams();
+
+                int lc = left + lp.leftMargin;
+                int tc = top + lp.topMargin;
+                int rc = lc + child.getMeasuredWidth();
+                int bc = tc + child.getMeasuredHeight();
+
+                child.layout(lc, tc, rc, bc);
+
+                left += child.getMeasuredWidth() + lp.leftMargin
+                        + lp.rightMargin + mTagHorizontalPadding;
+                if (mAutoStretch) left += gap;
+            }
+            top += lineHeight;
         }
     }
 
