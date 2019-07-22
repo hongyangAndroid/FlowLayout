@@ -56,14 +56,14 @@ public abstract class TagAdapter<T> {
         return mCheckedPosList;
     }
 
-
     public int getCount() {
         return mTagDatas == null ? 0 : mTagDatas.size();
     }
 
     public void notifyDataChanged() {
-        if (mOnDataChangedListener != null)
+        if (mOnDataChangedListener != null) {
             mOnDataChangedListener.onChanged();
+        }
     }
 
     public T getItem(int position) {
@@ -72,18 +72,15 @@ public abstract class TagAdapter<T> {
 
     public abstract View getView(FlowLayout parent, int position, T t);
 
-
-    public void onSelected(int position, View view){
-        Log.d("zhy","onSelected " + position);
+    public void onSelected(int position, View view) {
+        Log.d("zhy", "onSelected " + position);
     }
 
-    public void unSelected(int position, View view){
-        Log.d("zhy","unSelected " + position);
+    public void unSelected(int position, View view) {
+        Log.d("zhy", "unSelected " + position);
     }
 
     public boolean setSelected(int position, T t) {
         return false;
     }
-
-
 }

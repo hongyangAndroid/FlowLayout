@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -72,9 +73,16 @@ public class ScrollViewTestFragment extends Fragment
             @Override
             public boolean onTagClick(View view, int position, FlowLayout parent)
             {
-                //Toast.makeText(getActivity(), mVals[position], Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), mVals[position], Toast.LENGTH_SHORT).show();
                 //view.setVisibility(View.GONE);
                 return true;
+            }
+        });
+        mFlowLayout.setOnTagLongClickListener(new TagFlowLayout.OnTagLongClickListener() {
+            @Override
+            public boolean onTagLongClick(View view, int position, FlowLayout parent) {
+                Toast.makeText(getActivity(), mVals[position], Toast.LENGTH_SHORT).show();
+                return false;
             }
         });
 

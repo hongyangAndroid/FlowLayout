@@ -59,9 +59,19 @@ public class SingleChooseFragment extends Fragment
             @Override
             public boolean onTagClick(View view, int position, FlowLayout parent)
             {
-                Toast.makeText(getActivity(), mVals[position], Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "onTagClick" + mVals[position], Toast.LENGTH_SHORT).show();
                 //view.setVisibility(View.GONE);
                 return true;
+            }
+        });
+
+        mFlowLayout.setOnTagLongClickListener(new TagFlowLayout.OnTagLongClickListener() {
+            @Override
+            public boolean onTagLongClick(View view, int position, FlowLayout parent) {
+                Toast.makeText(getActivity(), "onTagLongClick" + mVals[position], Toast.LENGTH_SHORT).show();
+                TextView textView =view.findViewById(R.id.tvv);
+                textView.setText(textView.getText().toString() + "onTagLongClick");
+                return false;
             }
         });
 

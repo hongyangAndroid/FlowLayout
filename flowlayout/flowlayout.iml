@@ -154,5 +154,7 @@
     <orderEntry type="library" name="Gradle: androidx.arch.core:core-runtime:2.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.collection:collection:1.0.0@jar" level="project" />
     <orderEntry type="module" module-name="flowlayout-lib" />
+    <orderEntry type="module" module-name="flowlayout-lib" />
+    <orderEntry type="module" module-name="flowlayout-lib" />
   </component>
 </module>
