@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion 29
+    buildToolsVersion "29.0.1"
 
     defaultConfig {
         applicationId "com.zhy.flowlayout"
-        minSdkVersion 10
-        targetSdkVersion 25
+        minSdkVersion 14
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
     }
@@ -20,9 +20,10 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:25.3.0'
-    compile project(':flowlayout-lib')
-    compile 'com.android.support:design:25.3.0'
-    compile 'com.zhy:base-adapter:2.0.1'
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api 'androidx.appcompat:appcompat:1.0.2'
+    api project(':flowlayout-lib')
+//    api 'androidx.appcompat:appcompat:1.0.2'
+    api 'com.zhy:base-adapter:2.0.1'
+    implementation 'com.google.android.material:material:1.0.0'
 }

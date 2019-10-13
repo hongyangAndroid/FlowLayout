@@ -1,13 +1,13 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
+//apply plugin: 'com.novoda.bintray-release'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion 29
+    buildToolsVersion "29.0.1"
 
     defaultConfig {
-        minSdkVersion 10
-        targetSdkVersion 25
+        minSdkVersion 14
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
     }
@@ -20,15 +20,15 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:support-v4:25.0.0'
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api 'androidx.core:core:1.0.2'
 }
 
-publish {
-    userOrg = 'hongyangandroid'//bintray.com用户名
-    groupId = 'com.hyman'//jcenter上的路径
-    artifactId = 'flowlayout-lib'//项目名称
-    publishVersion = '1.1.2'//版本号
-    desc = 'save time'
-    website = 'https://github.com/hongyangAndroid/FlowLayout'
-}
+//publish {
+//    userOrg = 'hongyangandroid'//bintray.com用户名
+//    groupId = 'com.hyman'//jcenter上的路径
+//    artifactId = 'flowlayout-lib'//项目名称
+//    publishVersion = '1.1.2'//版本号
+//    desc = 'save time'
+//    website = 'https://github.com/hongyangAndroid/FlowLayout'
+//}
